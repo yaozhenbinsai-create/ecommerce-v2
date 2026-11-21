@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="referrer" content="same-origin">
+  <title>{{ '更改密码' if change_password else ('股东登录' if shareholder_login else '登录') }} · 织造台</title>
+  <link rel="stylesheet" href="/static/account-auth.css?v=20260914-login">
+</head>
+<body class="auth-page">
+  <main class="auth-layout auth-login-layout">
+    <section class="auth-intro" aria-labelledby="brand-title">
+      <a class="auth-brand" href="/" aria-label="织造台首页"><span class="auth-brand-mark" aria-hidden="true">织</span><span id="brand-title">织造台<small>家纺产品运营中心</small></span></a>
+      <div class="auth-intro-copy"><p class="auth-eyebrow">你的产品运营工作台</p><h1>从设计到经营，<br>在一处有序完成。</h1><p>登录自己的账号，继续处理产品设计、平台资料与店铺日常。</p></div>
+      <p class="auth-intro-foot"><span aria-hidden="true">◈</span> 独立账号 · 按职责访问{% if not password_only and not shareholder_login %} · 双重验证{% endif %}</p>
+    </section>
+    <section class="auth-card" aria-labelledby="form-title">
+      <div class="auth-card-heading"><span class="auth-kicker">{{ '股东账号访问' if shareholder_login else '账号访问' }}</span><h2 id="form-title">{{ '更改账号密码' if change_password else ('股东登录' if shareholder_login else '欢迎回到织造台') }}</h2><p>{{ '输入当前密码，再设置自己的新密码。' if change_password else ('使用管理员创建的股东账号和密码登录。' if shareholder_login else ('使用账号和密码登录。账号由超级管理员统一管理。' if password_only else '使用账号、密码和验证器验证码登录。')) }}</p></div>
+      {% if local_only %}<div class="auth-notice auth-local"><span aria-hidden="true">⌂</span><p><strong>当前为本机模式</strong>仅限当前电脑使用；公网部署需HTTPS</p></div>{% endif %}
+      {% if error %}<div class="auth-notice auth-error" role="alert">{{ error }}</div>{% endif %}
+      {% if message %}<div class="auth-notice auth-success" role="status">{{ message }}</div>{% endif %}
+      <form class="auth-form" method="post" action="{{ ('/shareholder-password' if change_password else '/shareholder-login') if shareholder_login else ('/commerce-password' if change_password else '/commerce-login') }}">
+        <label class="auth-field" for="username"><span>账号</span><input id="username" name="username" type="text" autocomplete="username" autocapitalize="none" spellcheck="false" maxlength="80" placeholder="输入你的账号" required autofocus></label>
+        <label class="auth-field" for="password"><span>{{ '当前密码' if change_password else '密码' }}</span><input id="password" name="password" type="password" autocomplete="current-password" maxlength="1024" placeholder="输入{{ '当前' if change_password else '账号' }}密码" required></label>
+        {% if change_password %}
+        <label class="auth-field" for="new_password"><span>新密码</span><input id="new_password" name="new_password" type="password" autocomplete="new-password" minlength="{{ password_minimum }}" maxlength="1024" aria-describedby="new-password-help" placeholder="至少 {{ password_minimum }} 个字符" required><small id="new-password-help">包含大写、小写字母、数字和特殊字符，不能包含账号，也不能复用最近 10 个密码。</small></label>
+        <label class="auth-field" for="confirm_password"><span>确认新密码</span><input id="confirm_password" name="confirm_password" type="password" autocomplete="new-password" minlength="{{ password_minimum }}" maxlength="1024" placeholder="再次输入新密码" required></label>
+        {% endif %}
+        {% if not password_only and not shareholder_login %}<label class="auth-field" for="otp"><span>动态验证码</span><input id="otp" name="otp" type="text" autocomplete="one-time-code" autocapitalize="none" spellcheck="false" maxlength="64" aria-describedby="otp-help" placeholder="6 位验证码或恢复码" {% if not mfa_migration %}required{% endif %}><small id="otp-help">验证码由手机 TOTP 验证器离线生成，无需短信或付费验证码服务；也可填写一次性恢复码。{% if mfa_migration %}首次尚未绑定时留空，验证密码后进入绑定页面。{% endif %}</small></label>{% endif %}
+        <button class="auth-button" type="submit">{{ '验证并更改密码' if change_password else '登录工作台' }}<span aria-hidden="true">→</span></button>
+      </form>
+      <div class="auth-form-footer">{% if change_password %}<a href="{{ '/shareholder-login' if shareholder_login else '/commerce-login' }}">← 返回登录</a>{% else %}<a href="{{ '/shareholder-password' if shareholder_login else '/commerce-password' }}">更改或更新到期密码</a>{% endif %}<span>请勿与他人共享账号</span></div>
+      {% if change_password and mfa_migration and not shareholder_login %}<p class="auth-form-tip">如果已经改密成功，请返回登录页使用新密码；首次绑定前，动态验证码留空。</p>{% endif %}
+    </section>
+  </main>
+</body>
+</html>

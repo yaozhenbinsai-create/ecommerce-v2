@@ -1,0 +1,26 @@
+.sidebar #nav.grouped-nav{display:block;overflow-x:hidden;padding:0 3px 8px 0}
+.nav-group{margin:0 0 8px;border-bottom:1px solid #ffffff12;padding-bottom:8px}
+.nav-group:last-child{border-bottom:0}
+.nav-group-heading{display:flex;align-items:center;gap:10px;min-height:46px;padding:10px 12px;list-style:none;color:#bdcfc5;font-size:14px;font-weight:650;border-radius:10px;cursor:pointer;user-select:none}
+.nav-group-heading::-webkit-details-marker{display:none}
+.nav-group-heading::after{content:'';width:6px;height:6px;border-right:1.5px solid currentColor;border-bottom:1.5px solid currentColor;transform:rotate(-45deg);transition:transform .15s}
+.nav-group[open]>.nav-group-heading::after{transform:rotate(45deg)}
+.nav-group-heading:hover{background:#ffffff0b;color:#fff}
+.nav-group.has-active>.nav-group-heading{color:#e6f0df}
+.nav-group-count{margin-left:auto;color:#91aa9d;font-size:12px;font-weight:400}
+.nav-group-heading:focus-visible,.sidebar .nav-item:focus-visible{outline:2px solid #c4d9a9;outline-offset:-2px}
+.nav-group-items{display:grid;gap:3px;margin:2px 0 2px 15px;padding-left:9px;border-left:1px solid #ffffff20}
+.sidebar .nav-group .nav-item{width:100%;min-height:42px;padding:9px 13px;font-size:14px;border-radius:8px}
+.sidebar .nav-group .nav-item>span:first-child{display:none}
+.sidebar .nav-group .nav-label{display:block;width:auto;height:auto;background:none;white-space:normal;font-size:inherit;text-align:left}
+.sidebar .nav-menu-toggle{display:none}
+@media(max-width:780px){
+  .sidebar .nav-menu-toggle{display:flex;align-items:center;justify-content:space-between;width:100%;min-height:44px;padding:10px 12px;border:1px solid #ffffff25;border-radius:10px;background:transparent;color:#edf5f0;font-size:15px;text-align:left}
+  .sidebar .nav-menu-toggle:hover{background:#ffffff10;color:#fff}
+  .nav-menu-toggle::after{content:'展开';font-size:12px;color:#bdcfc5}
+  .nav-menu-toggle[aria-expanded=true]::after{content:'收起'}
+  .sidebar #nav.grouped-nav{display:none;margin-top:10px;max-height:65vh;overflow-y:auto;overscroll-behavior:contain}
+  .sidebar.nav-mobile-open #nav.grouped-nav{display:block}
+  .sidebar .nav-group .nav-item{min-height:44px}
+}
+@media(prefers-reduced-motion:reduce){.nav-group-heading::after{transition:none}}

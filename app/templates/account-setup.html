@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="referrer" content="no-referrer">
+  <title>设置管理员 · 织造台</title>
+  <link rel="stylesheet" href="/static/account-auth.css?v=20260914-login">
+</head>
+<body class="auth-page auth-setup-page">
+  <main class="auth-setup-layout">
+    <header class="auth-setup-header"><a class="auth-brand" href="/" aria-label="返回织造台"><span class="auth-brand-mark" aria-hidden="true">织</span><span>织造台<small>家纺产品运营中心</small></span></a><a class="auth-back-link" href="/">← 返回工作台</a></header>
+    <section class="auth-card auth-setup-card" aria-labelledby="setup-title">
+      <div class="auth-card-heading"><span class="auth-kicker">首次使用 · 账号保护</span><h1 id="setup-title">设置你的管理员账号</h1><p>创建独立账号并绑定验证器，完成后启用登录保护。</p></div>
+      <ol class="auth-steps" aria-label="设置进度"><li class="is-current" id="setup-step-account" aria-current="step"><span>01</span>创建账号</li><li id="setup-step-mfa"><span>02</span>绑定验证器</li></ol>
+      <div class="auth-notice auth-local" id="setup-local-notice"><span aria-hidden="true">⌂</span><p><strong>在受信任的设备上完成设置</strong>本机访问仅限当前电脑使用；公网部署需HTTPS。</p></div>
+      <div class="auth-notice auth-error" id="setup-error" role="alert" tabindex="-1" hidden></div>
+      <input id="setup-csrf" type="hidden" value="{{ csrf_token }}" autocomplete="off">
+      <form class="auth-form" id="account-setup-form" method="post" action="/commerce-setup/finish" autocomplete="off">
+        <div id="setup-account-fields" class="auth-form-section">
+          <label class="auth-field" for="setup-username"><span>管理员账号</span><input id="setup-username" name="username" type="text" autocomplete="username" autocapitalize="none" spellcheck="false" maxlength="80" value="ADMIN" readonly required><small>使用 ADMIN 完成首次设置，再用认证器保护此账号。</small></label>
+          <label class="auth-field" for="setup-password"><span>密码</span><input id="setup-password" name="password" type="password" autocomplete="new-password" minlength="12" maxlength="1024" aria-describedby="setup-password-help" placeholder="至少 12 个字符" required><small id="setup-password-help">包含大写、小写字母、数字和特殊字符，不能包含账号。</small></label>
+          <label class="auth-field" for="setup-confirm"><span>确认密码</span><input id="setup-confirm" name="confirm_password" type="password" autocomplete="new-password" minlength="12" maxlength="1024" placeholder="再次输入密码" required></label>
+          <button class="auth-button" type="submit" id="setup-begin">继续，绑定验证器<span aria-hidden="true">→</span></button>
+        </div>
+        <div id="setup-mfa-fields" class="auth-form-section" hidden>
+          <div class="auth-binding-title"><h2>添加到你的验证器</h2><span class="auth-time" id="setup-expiry" role="timer">10:00 内完成</span></div>
+          <p class="auth-description">在验证器中选择“手动输入设置密钥”，添加以下账号。密钥仅用于这次绑定，请勿发送给他人。</p>
+          <dl class="auth-binding-meta"><div><dt>账号</dt><dd id="binding-account"></dd></div><div><dt>类型</dt><dd>基于时间 · 6 位 · 30 秒 · SHA1</dd></div></dl>
+          <div class="auth-secret-box"><div class="auth-box-head"><label for="setup-secret">设置密钥</label><button class="auth-copy-button" id="copy-secret" type="button">复制密钥</button></div><input id="setup-secret" type="text" readonly autocomplete="off" spellcheck="false" aria-label="验证器设置密钥"></div>
+          <section class="auth-recovery-box" aria-labelledby="recovery-title"><div class="auth-box-head"><h3 id="recovery-title">保存一次性恢复码</h3><button class="auth-copy-button" id="copy-recovery" type="button">复制恢复码</button></div><p>验证器丢失时可用于恢复登录。每个码只能使用一次，请单独保存在安全的位置。</p><ul id="setup-recovery-codes" aria-label="一次性恢复码"></ul></section>
+          <p id="setup-copy-status" class="auth-copy-status" role="status" aria-live="polite"></p>
+          <label class="auth-check"><input id="setup-recovery-saved" type="checkbox"><span>我已将恢复码保存到安全位置</span></label>
+          <label class="auth-field" for="setup-otp"><span>验证器中的动态验证码</span><input id="setup-otp" name="otp" type="text" inputmode="numeric" autocomplete="one-time-code" pattern="[0-9]{6}" maxlength="6" placeholder="输入 6 位验证码"><small>填写刚才添加的账号所显示的验证码。</small></label>
+          <button class="auth-button" type="submit" id="setup-finish">完成设置并前往登录<span aria-hidden="true">→</span></button>
+          <p class="auth-subtle">完成绑定前，管理员账号不会创建。页面过期后需重新开始。</p>
+        </div>
+      </form>
+      <div id="setup-expired" class="auth-expired" hidden><h2>本次设置已过期</h2><p>密钥和恢复码已清除，请刷新页面重新开始。</p><button class="auth-button" id="setup-restart" type="button">刷新并重新设置</button></div>
+      <noscript><div class="auth-notice auth-error">管理员设置需要启用 JavaScript。请在浏览器中启用后重新打开此页。</div></noscript>
+    </section>
+    <p class="auth-setup-foot">首次管理员设置完成后，其他员工应使用各自的独立账号。<br>已经完成设置？<a href="/commerce-login">前往登录</a></p>
+  </main>
+  <script defer src="/static/account-setup.js?v=20260914-login"></script>
+</body>
+</html>

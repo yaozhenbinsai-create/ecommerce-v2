@@ -1,0 +1,12 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>用户管理 · 织造台</title><link rel="stylesheet" href="/static/account-auth.css?v=20260914-password"><link rel="stylesheet" href="/static/user-management.css"></head>
+<body class="users-page"><main><header><a href="/">← 返回工作台</a><div class="workspace-account" data-account-session></div></header>
+<h1>用户管理</h1><p class="description">每人使用自己的账号。股东账号可使用业务工作台；超级管理员负责用户、安全设置和平台凭据。</p>
+<p id="users-message" role="status"></p>
+<section class="users-card"><h2>创建用户</h2><form id="create-user-form" method="post" action="/api/users">
+<label>账号<input name="username" autocomplete="off" maxlength="80" required></label>
+<label>角色<select name="role"><option value="shareholder">股东（业务全功能）</option><option value="operator">运营</option><option value="production">生产</option></select></label>
+<label>初始密码<input name="password" type="password" autocomplete="new-password" minlength="{{ password_minimum }}" maxlength="1024" required></label>
+<button type="submit">创建用户</button></form><p class="hint">初始密码至少{{ password_minimum }}位，包含大小写、数字和特殊字符。用户首次登录时须更改为自己的密码。股东账号使用 <a href="/shareholder-login">股东登录页</a>。</p></section>
+<section class="users-card"><div class="users-title"><h2>用户列表</h2><button id="refresh-users" type="button">刷新</button></div><div class="users-table-wrap"><table><thead><tr><th>账号</th><th>角色</th><th>状态</th><th>操作</th></tr></thead><tbody id="user-list"></tbody></table></div></section>
+<dialog id="reset-password-dialog"><form id="reset-password-form" method="post" action="/user-management"><h2>重置用户密码</h2><p id="reset-target"></p><label>新初始密码<input name="password" type="password" autocomplete="new-password" minlength="{{ password_minimum }}" maxlength="1024" required></label><p class="hint">旧会话立即失效，用户下次登录须更改密码。</p><p id="reset-error" role="alert"></p><div class="dialog-actions"><button type="button" id="cancel-reset">取消</button><button type="submit">保存新密码</button></div></form></dialog>
+</main><script defer src="/static/account-session.js?v=20260925-shareholder"></script><script defer src="/static/security-session.js?v=20260924-long-session"></script><script defer src="/static/user-management.js?v=20260925-shareholder"></script></body></html>

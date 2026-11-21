@@ -1,0 +1,16 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>绑定验证器 · 织造台</title><link rel="stylesheet" href="/static/account-auth.css"></head>
+<body class="auth-page"><main class="auth-setup-layout"><section class="auth-card auth-setup-card">
+<h1>绑定你的验证器</h1><p>账号：{{ username }}。完成双重验证后才能进入工作台。</p>
+<p>使用支持 TOTP 的手机验证器即可。验证码由手机本地生成，不需要短信平台或购买验证码服务。</p>
+<p>在验证器中手动添加账号，选择“基于时间”，账号名称填写“织造台”。</p>
+<input id="mfa-csrf" type="hidden" value="{{ csrf }}">
+<button id="begin" class="auth-button" type="button">显示绑定密钥和恢复码</button>
+<section id="binding" hidden><p>将下面密钥填入验证器（不要发送给他人）：</p><div class="auth-secret-box"><code id="secret" class="auth-binding-secret"></code></div>
+<p>恢复码仅在这次绑定中显示。请保存在安全位置，每个只能使用一次：</p><pre id="codes"></pre>
+<form id="finish" class="auth-form"><label class="auth-field">动态验证码<input name="otp" autocomplete="one-time-code" inputmode="numeric" pattern="[0-9]{6}" maxlength="6" required></label>
+<label class="auth-check"><input name="saved" type="checkbox" required> 我已安全保存恢复码</label>
+<button class="auth-button" type="submit">确认绑定</button></form></section>
+<p id="message" role="status"></p><a href="/commerce-login">返回登录</a>
+</section></main><script defer src="/static/mfa-enrollment.js"></script></body></html>

@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>织造台 · 家纺产品运营</title>
+
+  <link rel="stylesheet" href="/static/app.css?v={{ asset_version('app.css') }}">
+  <link rel="stylesheet" href="/static/probe.css?v={{ asset_version('probe.css') }}">
+  <link rel="stylesheet" href="/static/account-auth.css?v={{ asset_version('account-auth.css') }}">
+  <link rel="stylesheet" href="/static/workspace-access.css?v={{ asset_version('workspace-access.css') }}">
+  <link rel="stylesheet" href="/static/design-journey.css?v={{ asset_version('design-journey.css') }}">
+  <link rel="stylesheet" href="/static/detail-page.css?v={{ asset_version('detail-page.css') }}">
+  <link rel="stylesheet" href="/static/commerce.css?v={{ asset_version('commerce.css') }}">
+  <link rel="stylesheet" href="/static/target-selection.css?v={{ asset_version('target-selection.css') }}">
+  <link rel="stylesheet" href="/static/support-center.css?v={{ asset_version('support-center.css') }}">
+  <link rel="stylesheet" href="/static/listing-overview.css?v={{ asset_version('listing-overview.css') }}">
+  <link rel="stylesheet" href="/static/listing-filters.css?v={{ asset_version('listing-filters.css') }}">
+  <link rel="stylesheet" href="/static/listing-bilingual.css?v={{ asset_version('listing-bilingual.css') }}">
+  <link rel="stylesheet" href="/static/sidebar-navigation.css?v={{ asset_version('sidebar-navigation.css') }}">
+  <link rel="stylesheet" href="/static/list-controls.css?v={{ asset_version('list-controls.css') }}">
+  <link rel="stylesheet" href="/static/workspace.css?v={{ asset_version('workspace.css') }}">
+</head>
+{% set workspace_role = request.state.commerce_role|default('admin', true) %}
+{% set initial_page = 'commerce_home' %}
+{% set initial_title = '运营指挥台' %}
+<body data-workspace-role="{{ workspace_role }}" data-initial-page="{{ initial_page }}"{% if initial_page == 'commerce_home' %} class="commerce-page"{% endif %}>
+  <a class="skip-link" href="#content">跳到工作区</a>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <div class="brand"><span class="brand-mark" aria-hidden="true">✳</span><div><strong>织造台<span class="brand-ai">AI</span></strong><small>PRODUCT OPERATIONS</small></div></div>
+      <button type="button" class="workspace-command" data-command-open><span>⌕</span>快速前往 <kbd>Ctrl K</kbd></button>
+      <button type="button" class="nav-menu-toggle icon-btn" aria-controls="nav" aria-expanded="false">功能菜单 · {{ initial_title }}</button>
+      <nav id="nav" class="grouped-nav" aria-label="主导航">
+        <button class="nav-item active nav-home" data-page="commerce_home" aria-current="page"><span aria-hidden="true">◈</span><span class="nav-label">运营指挥台</span></button>
+        {% for group_id, group_title, destinations in [
+          ('products', '01 / 商品工作空间', [('supplier_imports', '导入与整理'), ('commerce_products', '商品库'), ('design_projects', 'AI 设计工坊')]),
+          ('sales', '02 / 销售与交付', [('commerce_listings', '上架工作台'), ('commerce_orders', '订单与发货'), ('commerce_aftersales', '售后处理'), ('commerce_support', '客户消息')]),
+          ('insights', '03 / 经营管理', [('commerce_operations', '运营计划'), ('commerce_finance', '财务与报表')]),
+          ('settings', '系统与连接', [('platform_accounts', '店铺与平台'), ('businesses', '业务配置'), ('models', '模型管理'), ('plans', '方案配置'), ('agents', 'Agent 管理')])
+        ] %}
+        {% set selected = initial_page in destinations|map(attribute=0)|list %}
+        <details class="nav-group{% if selected %} has-active{% endif %}" data-nav-group="{{ group_id }}"{% if selected %} open{% endif %}>
+          <summary class="nav-group-heading"><span>{{ group_title }}</span><span class="nav-group-count" aria-hidden="true">{{ destinations|length }}</span></summary>
+          <div class="nav-group-items">
+            {% for destination, label in destinations %}
+            <button class="nav-item{% if destination == initial_page %} active{% endif %}" data-page="{{ destination }}"{% if destination == initial_page %} aria-current="page"{% endif %}><span aria-hidden="true" data-nav-icon="{{ destination }}">{{ label[0] }}</span><span class="nav-label">{{ label }}</span></button>
+            {% endfor %}
+          </div>
+        </details>
+        {% endfor %}
+      </nav>
+      <div class="side-note"><i></i><div><b>每一步，都有迹可循</b><br>商品 · 设计 · 上架 · 交付<br><a href="/security-center">安全与部署检查 ↗</a></div></div>
+    </aside>
+    <main>
+      <header class="mobile-head"><div class="brand"><span class="brand-mark">织</span><strong>织造台</strong></div></header>
+      <div class="workspace-topbar"><div class="workspace-breadcrumb"><span>工作空间</span><span aria-hidden="true">/</span><strong id="workspace-location">运营指挥台</strong></div><div class="workspace-top-actions"><button type="button" class="workspace-mobile-search" data-command-open aria-label="快速查找页面或商品">⌕</button><button type="button" class="workspace-help" data-workspace-help aria-label="查看当前页面使用说明">使用指引 <span>?</span></button><details class="workspace-account-menu"><summary aria-label="账号菜单"><span class="workspace-avatar" aria-hidden="true">{{ request.state.commerce_username|default('织', true)|first|upper }}</span><span>{{ request.state.commerce_username|default('账号', true) }}</span><span aria-hidden="true">⌄</span></summary><div class="workspace-account" data-account-session aria-label="当前账号"><span class="workspace-account-name">{{ request.state.commerce_username|default('正在读取账号信息…', true) }}</span></div></details></div></div>
+      <section class="hero">
+        <div><p class="eyebrow" id="workspace-eyebrow">YOUR OPERATIONS, IN FOCUS</p><h1 id="title">{{ initial_title }}</h1><p id="subtitle">把商品从资料整理带到设计、上架和交付，每一步清楚可见。</p></div>
+        <button class="primary" id="add" hidden><b>＋</b><span id="addLabel"></span></button>
+      </section>
+      <div id="notice" role="status"></div>
+      <section class="stats" id="stats"></section>
+      <section class="panel">
+        <div class="panel-head"><div><h2 id="listTitle">今日工作</h2><p id="panelHint">先关注需要你处理的事</p></div><label class="search"><span aria-hidden="true">⌕</span><input id="search" aria-label="搜索当前工作区" placeholder="搜索名称或配置内容"><kbd>/</kbd></label></div>
+        <div id="content" tabindex="-1"><div class="workspace-skeleton" role="status" aria-label="正在读取工作台数据"><div></div><div></div><div></div><span>正在准备你的工作空间…</span></div></div>
+      </section>
+    </main>
+  </div>
+
+  <dialog id="editor">
+    <form id="form">
+      <div class="dialog-head"><div><p class="eyebrow">CONFIGURATION</p><h2 id="dialogTitle"></h2></div><button class="icon-btn" type="button" data-close>×</button></div>
+      <div class="form-grid" id="fields"></div>
+      <div class="dialog-foot"><button class="secondary" id="cancelButton" type="button" data-close>取消</button><button class="primary" id="saveButton" type="submit">保存配置</button></div>
+    </form>
+  </dialog>
+<script src="/static/media-images.js?v={{ asset_version('media-images.js') }}"></script>
+<script src="/static/app.js?v={{ asset_version('app.js') }}"></script>
+  <script src="/static/business-sizes.js?v={{ asset_version('business-sizes.js') }}"></script>
+  <script src="/static/platform-sync.js?v={{ asset_version('platform-sync.js') }}"></script>
+  <script src="/static/import-center.js?v={{ asset_version('import-center.js') }}"></script>
+<script src="/static/detail-page.js?v={{ asset_version('detail-page.js') }}"></script>
+<script src="/static/simple-design.js?v={{ asset_version('simple-design.js') }}"></script>
+<script src="/static/category-maintenance.js?v={{ asset_version('category-maintenance.js') }}"></script>
+<script src="/static/listing-overview.js?v={{ asset_version('listing-overview.js') }}"></script>
+<script src="/static/listing-filters.js?v={{ asset_version('listing-filters.js') }}"></script>
+<script src="/static/listing-media.js?v={{ asset_version('listing-media.js') }}"></script>
+<script src="/static/listing-bilingual.js?v={{ asset_version('listing-bilingual.js') }}"></script>
+<script src="/static/target-selection.js?v={{ asset_version('target-selection.js') }}"></script>
+<script src="/static/order-management.js?v={{ asset_version('order-management.js') }}"></script>
+<script src="/static/shipping-templates.js?v={{ asset_version('shipping-templates.js') }}"></script>
+<script src="/static/aftersale-management.js?v={{ asset_version('aftersale-management.js') }}"></script>
+<script src="/static/support-api.js?v={{ asset_version('support-api.js') }}"></script>
+<script src="/static/support-center.js?v={{ asset_version('support-center.js') }}"></script>
+<script src="/static/platform-authorization.js?v={{ asset_version('platform-authorization.js') }}"></script>
+<script src="/static/product-archive.js?v={{ asset_version('product-archive.js') }}"></script>
+<script src="/static/workspace-ui.js?v={{ asset_version('workspace-ui.js') }}"></script>
+<script src="/static/commerce.js?v={{ asset_version('commerce.js') }}"></script>
+<script src="/static/business-mapping.js?v={{ asset_version('business-mapping.js') }}"></script>
+<script src="/static/sidebar-navigation.js?v={{ asset_version('sidebar-navigation.js') }}"></script>
+<script src="/static/list-controls.js?v={{ asset_version('list-controls.js') }}"></script>
+<script src="/static/workspace-shell.js?v={{ asset_version('workspace-shell.js') }}"></script>
+<script defer src="/static/security-session.js?v={{ asset_version('security-session.js') }}"></script>
+<script defer src="/static/account-session.js?v={{ asset_version('account-session.js') }}"></script>
+</body>
+</html>

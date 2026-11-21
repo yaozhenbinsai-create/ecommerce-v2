@@ -1,0 +1,3 @@
+/* Match the operations role's server permissions; business choices remain loaded. */
+#add[hidden]{display:none!important}
+body[data-workspace-role="operator"] :is([data-page="businesses"], [data-page="models"], [data-page="plans"], [data-page="agents"], [data-page="supplier_imports"], [data-page="design_projects"], [data-page="platform_accounts"], [data-nav-group="settings"], a[href="/security-center"]) { display: none !important; }

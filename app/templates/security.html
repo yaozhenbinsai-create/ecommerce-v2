@@ -1,0 +1,14 @@
+<!doctype html>
+<html lang="zh-CN">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>安全与部署检查 · 织造台</title><link rel="stylesheet" href="/static/security-center.css"><link rel="stylesheet" href="/static/account-auth.css?v=20260914-login"></head>
+<body><main>
+<div class="security-account-heading"><a href="/">← 返回织造台</a><div class="workspace-account" data-account-session aria-label="当前账号"><a href="/commerce-login">账号登录</a></div></div>
+<h1>安全与部署检查</h1>
+<p>查看当前主机的配置证据，以及上线前仍需落实的云端和公司措施。</p>
+<div class="callout">这份检查不代表亚马逊审核通过。只有实际配置、验证并持续执行的措施，才能在问卷中填写“是”。</div>
+<p id="scope"></p><button id="refresh" type="button">刷新检查</button>
+<p id="error" role="alert"></p>
+<div class="table-wrap"><table><thead><tr><th>检查项</th><th>状态</th><th>说明</th></tr></thead><tbody id="checks"></tbody></table></div>
+<p>账号由超级管理员统一创建。启用双重验证后，每位员工首次登录须自行绑定验证器并保存恢复码；上表显示当前启用与绑定状态。</p>
+</main><script defer src="/static/security-center.js"></script><script defer src="/static/security-session.js?v=20260924-long-session"></script><script defer src="/static/account-session.js?v=20260925-shareholder"></script></body></html>

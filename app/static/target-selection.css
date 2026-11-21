@@ -1,0 +1,9 @@
+.target-account{border:1px solid #dce4dd;border-radius:12px;padding:16px;margin:12px 0;background:#fff}
+.target-account-heading,.target-choice{display:flex;align-items:center;gap:9px;cursor:pointer}
+.target-account-heading{border-bottom:1px solid #edf0eb;padding-bottom:12px;flex-wrap:wrap}
+.target-account-heading>span,.target-choice small{font-size:12px;color:#778278}
+.target-marketplaces{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin-top:12px}
+.target-listings{display:grid;gap:12px;margin-top:12px}
+.target-account input[type=checkbox]{width:17px!important;height:17px!important;flex:0 0 17px;accent-color:#386148;margin:0!important}
+.target-choice:has(input:disabled){opacity:.55;cursor:default}
+.target-batch-history{margin-bottom:16px}

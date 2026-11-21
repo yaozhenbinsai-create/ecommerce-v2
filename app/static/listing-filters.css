@@ -1,0 +1,13 @@
+.lo-filter-panel{padding:20px 22px;border-bottom:1px solid var(--ui-line);background:#fbfdfb}
+.lo-filter-panel[hidden]{display:none}
+.lo-filter-heading{display:flex;gap:14px;align-items:center;margin-bottom:16px;font-size:14px}.lo-filter-count{font-size:12px;color:var(--ui-muted)}
+.lo-filter-common{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px 18px}
+.lo-filter-form label{display:flex;flex-direction:column;gap:7px;min-width:0;font-size:12px;color:#586e60}
+.lo-filter-form input,.lo-filter-form select{width:100%;min-width:0;max-width:100%;border:1px solid var(--ui-line);border-radius:8px;background:#fff;padding:9px 10px;font:inherit;font-size:13px;color:var(--ui-ink);height:40px}
+.lo-filter-form input:focus,.lo-filter-form select:focus{outline:2px solid #78a58d;outline-offset:1px}
+.lo-filter-advanced{margin-top:18px}.lo-filter-advanced>summary{font-size:13px;color:#315f48;cursor:pointer;width:fit-content}
+.lo-filter-extra{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:14px}.lo-filter-extra fieldset{min-width:0;margin:0;padding:12px;border:1px solid var(--ui-line);border-radius:9px}.lo-filter-extra legend{padding:0 6px;font-size:12px;color:#586e60}.lo-filter-dates{grid-column:1/-1}.lo-filter-range{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.lo-filter-footer{display:flex;justify-content:space-between;gap:18px;align-items:center;margin-top:18px}.lo-filter-footer>span{font-size:12px;color:var(--ui-muted)}.lo-filter-footer>div{display:flex;gap:8px;flex-shrink:0}.lo-filter-error{font-size:13px;color:#a24b28;margin-bottom:0}
+@media(min-width:1800px){.lo-filter-common{grid-template-columns:repeat(4,minmax(0,1fr))}}
+@media(max-width:1100px){.lo-filter-extra{grid-template-columns:1fr}.lo-filter-common{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:600px){.lo-filter-panel{padding:16px}.lo-filter-footer{align-items:stretch;flex-direction:column;gap:12px}.lo-filter-footer>div{justify-content:flex-end}.lo-filter-range{grid-template-columns:1fr 1fr}.lo-filter-range>label:first-child{grid-column:1/-1}.lo-filter-common{gap:12px}.lo-filter-dates{grid-column:auto}}

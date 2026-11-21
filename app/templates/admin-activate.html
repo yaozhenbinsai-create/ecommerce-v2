@@ -1,0 +1,11 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>超级管理员初始密码 · 织造台</title><link rel="stylesheet" href="/static/account-auth.css?v=20260914-password"></head>
+<body class="auth-page"><main class="auth-setup-layout"><header class="auth-setup-header"><span class="auth-brand"><span class="auth-brand-mark">织</span><span>织造台<small>家纺产品运营中心</small></span></span></header>
+<section class="auth-card auth-setup-card"><div class="auth-card-heading"><span class="auth-kicker">超级管理员已预置</span><h1>设置你的初始密码</h1><p>你拥有系统配置和用户管理权限。设置一次后，以后直接使用账号和密码登录。</p></div>
+<div id="activation-error" class="auth-notice auth-error" role="alert" hidden></div>
+<input id="activation-csrf" type="hidden" value="{{ csrf_token }}">
+<form id="owner-password-form" class="auth-form" method="post" action="/admin-activate/finish">
+<label class="auth-field"><span>超级管理员账号</span><input value="{{ username }}" readonly autocomplete="username"><small>这是系统预置的唯一超级管理员。</small></label>
+<label class="auth-field"><span>初始密码</span><input id="owner-password" type="password" autocomplete="new-password" minlength="12" maxlength="1024" placeholder="设置仅你知道的密码" required autofocus><small>至少12位，包含大小写字母、数字和特殊字符，不能包含账号。</small></label>
+<label class="auth-field"><span>确认密码</span><input id="owner-confirm" type="password" autocomplete="new-password" minlength="12" maxlength="1024" placeholder="再次输入密码" required></label>
+<button class="auth-button" type="submit">保存密码，前往登录 →</button></form>
+<p class="auth-setup-foot">此入口仅用于本机第一次设置密码，完成后自动关闭。其他账号由你在“用户管理”中创建。</p></section></main><script defer src="/static/admin-activate.js?v=20260914-password"></script></body></html>

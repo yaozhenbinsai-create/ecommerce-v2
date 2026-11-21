@@ -1,0 +1,14 @@
+{
+  "source": "Amazon官方产品类型清单（2023-09-15公告附件）：https://m.media-amazon.com/images/G/01/F2_Pricing/Product_Types_Required_List_Price_11_13_23.xlsx",
+  "source_date": "2023-09-15",
+  "categories": [
+    {"code":"TEXTILE_SET_4","name":"家纺四件套","business_name":"家纺四件套","path":"家居 > 床品 > 四件套","product_type":"BED_LINEN_SET","category_path":"Home & Kitchen > Bedding > Duvet Covers & Sets","notes":"当前组合：床单、被套、枕套×2。套件按完整组合维护；平台可能按实际组成推荐更细类型。"},
+    {"code":"TEXTILE_SET_3","name":"家纺三件套","business_name":"家纺三件套","path":"家居 > 床品 > 三件套","product_type":"BED_LINEN_SET","category_path":"Home & Kitchen > Bedding > Duvet Covers & Sets","notes":"当前组合：床单、被套、枕套。套件按完整组合维护。"},
+    {"code":"TEXTILE_SET_2","name":"家纺两件套","business_name":"家纺两件套","path":"家居 > 床品 > 两件套","product_type":"BED_LINEN_SET","category_path":"","notes":"当前组合为枕套、床套，不含被套。原业务中的Duvet Covers & Sets不宜直接沿用，细分类路径待确认床套实际形态后补充。"},
+    {"code":"FLAT_SHEET","name":"床单","business_name":"床单","path":"家居 > 床品 > 床单","product_type":"FLAT_SHEET","category_path":"Home & Kitchen > Bedding > Flat Bed Sheets"},
+    {"code":"BED_PILLOW","name":"枕芯","business_name":"枕芯","path":"家居 > 床品 > 枕芯","product_type":"PILLOW","category_path":"Home & Kitchen > Bedding > Bed Pillows","notes":"用于睡眠枕芯；装饰抱枕、旅行枕等应按实际用途另建分类。"},
+    {"code":"FITTED_SHEET","name":"床笠","business_name":"床笠","path":"家居 > 床品 > 床笠","product_type":"FITTED_SHEET","category_path":"Home & Kitchen > Bedding > Fitted Bed Sheets"},
+    {"code":"PILLOWCASE","name":"枕套","business_name":"枕套","path":"家居 > 床品 > 枕套","product_type":"PILLOWCASE","category_path":"Home & Kitchen > Bedding > Pillowcases"},
+    {"code":"DUVET_COVER","name":"被套","business_name":"被套","path":"家居 > 床品 > 被套","product_type":"DUVET_COVER","category_path":"Home & Kitchen > Bedding > Duvet Covers & Sets","notes":"单独被套，不包含被芯。"}
+  ]
+}

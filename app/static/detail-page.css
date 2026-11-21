@@ -1,0 +1,8 @@
+.detail-continuous { max-width:780px; margin:24px auto; border:1px solid #e0e8dd; background:white; }
+.detail-continuous img { display:block; width:100%; height:auto; }
+.flow-product-actions { flex-wrap:wrap; }
+.detail-material-summary { padding:16px; margin:20px 0; border:1px solid #dce6d9; border-radius:10px; }
+.detail-material-summary p { line-height:1.7; }
+.c-dialog .c-images[data-aux-images] { display:grid; grid-template-columns:minmax(0,1fr); max-width:780px; margin:20px auto; gap:24px; }
+.c-dialog .c-images[data-aux-images] figure { min-width:0; }
+.c-dialog .c-images[data-aux-images] img { display:block; width:100%; height:auto; object-fit:contain; }
